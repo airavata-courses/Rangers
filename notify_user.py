@@ -1,5 +1,3 @@
-#Rocco Manzo
-#11/30/2018
 
 import sys
 import smtplib
@@ -11,13 +9,13 @@ def sendEmail(emails):
     msg['Subject'] = "Submit Eval"
 
     for email in emails:
-        msg['From'], msg['To'] = "oosdreminder@gmail.com", email
+        msg['From'], msg['To'] = "reminder@gmail.com", email
         # Send the message via gmail SMTP server
         s = smtplib.SMTP('smtp.gmail.com', 587)
         #connect to the gmail server
         s.ehlo()
         s.starttls()
-        s.login(msg['From'], 'oosdisgreat')
+        s.login(msg['From'], 'notification')
         #TODO: make it parse email and pass from config.ini?
         s.sendmail(msg['From'], [msg['To']], msg.as_string())
         s.quit()
