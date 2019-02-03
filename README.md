@@ -1,3 +1,3 @@
 # Rangers
 
-This is the microservice for Room management.
+This is the UI for the project.
