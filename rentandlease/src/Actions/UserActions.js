@@ -12,6 +12,10 @@ export const login = (username, password) => dispatch => {
   );
 };
 
+// export const verifyOtp = (otp) => dispatch => {
+//   return new Promise()
+// }
+
 function set_User(user) {
   return {
     type: LOGIN_SUCCESS,

@@ -65,9 +65,8 @@ export class Login extends PureComponent {
   };
 
   render() {
-    // return <LoginForm onSubmit={this.submit} />;
     return (
-      <form onSubmit={event => this.submit(event)}>
+      <form>
         <div>
           <label htmlFor="username">Email</label>
           <input
@@ -92,7 +91,7 @@ export class Login extends PureComponent {
         {this.state.validationerror.password && (
           <div>{this.state.validationerror.password}</div>
         )}
-        <Button variant="primary" type="submit">
+        <Button variant="primary" onClick={event => this.submit(event)}>
           Login
         </Button>
         <Button
@@ -106,17 +105,13 @@ export class Login extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    Login
-  };
-};
+const mapStateToProps = state => ({
+  isLoggedIn: state.user.isLoggedIn
+});
 
 // Login = reduxForm({ form: "Login" })(Login);
 
 export default connect(
-  () => ({}),
+  mapStateToProps,
   { login, Login_failure }
 )(Login);
