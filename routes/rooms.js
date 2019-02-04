@@ -24,6 +24,16 @@ router.get("/:id?", function(req, res, next) {
   }
 });
 
+router.get("/getByLocation/:location", function(req, res, next) {
+  room.getRoomsByLocation(req.params.location, function(err, rows) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
 router.post("/", function(req, res, next) {
   console.log("request body");
   console.log(req.body);
