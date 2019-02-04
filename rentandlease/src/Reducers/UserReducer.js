@@ -1,11 +1,12 @@
-import { LOGIN_SUCCESS } from "../Constants/Constants";
+import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../Constants/Constants";
 
 const initialState = {
   isLoggedIn: false,
   firstName: null,
   lastName: null,
   emailAddress: null,
-  contactNumber: null
+  contactNumber: null,
+  loginMessage: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -13,11 +14,19 @@ export default (state = initialState, { type, payload }) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: payload.isLoggedIn,
+        isLoggedIn: true,
         firstName: payload.firstName,
         lastName: payload.lastName,
         emailAddress: payload.emailAddress,
-        contactNumber: payload.contactNumber
+        contactNumber: payload.contactNumber,
+        loginMessage: null
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoggedIn: false,
+        loginMessage: payload
       };
 
     default:

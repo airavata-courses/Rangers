@@ -53,14 +53,16 @@ export const getApi = (url, type, onSuccess, onFailure) => {
 export const postApi = (url, onSuccess, onFailure, data = {}) => {
   let domain = getDomain();
   let completeurl = domain + url;
+  console.log(data);
   console.log(onSuccess);
-  onSuccess({
-    isLoggedIn: true,
-    firstName: "Ameya",
-    lastName: "Angal",
-    emailAddress: "aangal@iu.edu",
-    contactNumber: "8122725134"
-  });
+  onSuccess("Done");
+  // onSuccess({
+  //   isLoggedIn: true,
+  //   firstName: "Ameya",
+  //   lastName: "Angal",
+  //   emailAddress: "aangal@iu.edu",
+  //   contactNumber: "8122725134"
+  // });
   //   fetch(completeurl, {
   //     method: "POST",
   //     mode: "cors", // no-cors, cors, *same-origin

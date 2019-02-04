@@ -69,7 +69,7 @@ export class AddListings extends PureComponent {
   };
 
   submit = event => {
-    let data = {
+    let postdata = {
       location: this.state.location,
       guests: this.state.guests,
       available: this.state.available,
@@ -94,7 +94,7 @@ export class AddListings extends PureComponent {
           addListingConfirmation: error
         });
       },
-      data
+      postdata
     );
   };
 
@@ -188,6 +188,10 @@ export class AddListings extends PureComponent {
               onChange={this.handleChange}
             />
           </div>
+
+          <Button name="AddListings" onClick={() => this.submit()}>
+            Add Listing{" "}
+          </Button>
         </form>
         <Modal
           show={this.state.showConfirmationModal}

@@ -19,6 +19,10 @@ export class Login extends PureComponent {
     };
   }
 
+  onSuccessfulLogin = () => {
+    this.props.history.push("/home");
+  };
+
   submit = event => {
     event.preventDefault();
     console.log(this.state);
@@ -35,7 +39,11 @@ export class Login extends PureComponent {
 
     this.setState({ validationerror: error });
 
-    this.props.login("aangal@iu.edu", "1234");
+    this.props.login(
+      this.state.username,
+      this.state.password,
+      this.onSuccessfulLogin
+    );
   };
 
   handleChange = event => {
@@ -91,6 +99,8 @@ export class Login extends PureComponent {
         {this.state.validationerror.password && (
           <div>{this.state.validationerror.password}</div>
         )}
+        {this.props.loginMessage && <div>{this.props.loginMessage}</div>}
+
         <Button variant="primary" onClick={event => this.submit(event)}>
           Login
         </Button>
@@ -106,12 +116,13 @@ export class Login extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.user.isLoggedIn
+  isLoggedIn: state.user.isLoggedIn,
+  loginMessage: state.user.loginMessage
 });
 
 // Login = reduxForm({ form: "Login" })(Login);
 
 export default connect(
   mapStateToProps,
-  { login, Login_failure }
+  { login }
 )(Login);
