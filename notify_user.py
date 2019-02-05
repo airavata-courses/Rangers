@@ -27,6 +27,7 @@ app.config['MAIL_USE_TLS'] = False
 app.config["MAIL_DEFAULT_SENDER"] = MAIL_DEFAULT_SENDER
 
 @app.route('/notify', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def sendEmail():
     try:
         post_data = request.get_json()
