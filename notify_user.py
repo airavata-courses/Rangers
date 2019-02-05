@@ -1,4 +1,3 @@
-
 import sys
 import smtplib
 from flask import Flask,request
@@ -27,7 +26,7 @@ app.config["MAIL_USE_SSL"] = MAIL_USE_SSL
 app.config['MAIL_USE_TLS'] = False
 app.config["MAIL_DEFAULT_SENDER"] = MAIL_DEFAULT_SENDER
 
-@app.route('/', methods=['POST'])
+@app.route('/notify', methods=['POST'])
 def sendEmail():
     try:
         post_data = request.get_json()
@@ -53,7 +52,5 @@ def sendEmail():
 
 if __name__ == '__main__':
     http_server = HTTPServer(WSGIContainer(app))
-
     http_server.listen(55555)
-
     IOLoop.instance().start()
