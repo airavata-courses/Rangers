@@ -68,7 +68,8 @@ export class Register extends Component {
         data => {
           this.props.history.push("/home");
         },
-        err => {}
+        err => {},
+        postdata
       );
     } else {
       let error = {
@@ -83,7 +84,8 @@ export class Register extends Component {
   };
   verifyOTP = () => {
     console.log("veriy otp");
-    getApi("url", "GET", data => this.onValidationOtp(data), error => {});
+    // getApi("url", "GET", data => this.onValidationOtp(data), error => {});
+    postApi("url", data => this.onValidationOtp(data), error => {});
   };
 
   handleChange = event => {

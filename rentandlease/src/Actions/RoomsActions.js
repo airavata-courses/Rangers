@@ -2,7 +2,12 @@ import { getApi, postApi } from "../Common/api";
 import { SET_ROOMS } from "../Constants/Constants";
 
 export const getRooms = () => dispatch => {
-  getApi("url", "Get", data => dispatch(setRooms(data)));
+  getApi(
+    "http://localhost:3010/rooms/",
+    "Get",
+    data => dispatch(setRooms(data)),
+    err => console.log(err)
+  );
 };
 
 export const confirmRoom = (id, useremail, sendNotification) => dispatch => {

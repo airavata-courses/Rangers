@@ -10,6 +10,7 @@ export class ViewListings extends PureComponent {
 
   sendNotification = useremail => {
     console.log(`Send email notification for ${useremail}`);
+    // post api call for sending notification
   };
 
   onBookClick = id => {
@@ -33,7 +34,7 @@ export class ViewListings extends PureComponent {
 const mapStateToProps = state => {
   return {
     rooms: state.rooms.rooms,
-    useremail: state.user.email
+    useremail: state.user.emailAddress
   };
 };
 
