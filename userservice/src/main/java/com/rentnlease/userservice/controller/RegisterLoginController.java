@@ -17,13 +17,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentnlease.userservice.data.UserOTPRepository;
 import com.rentnlease.userservice.data.UserRepository;
+import com.rentnlease.userservice.entity.ApiResponse;
+import com.rentnlease.userservice.entity.ApiUserResponse;
+import com.rentnlease.userservice.entity.GenerateOTPRequest;
+import com.rentnlease.userservice.entity.LoginRequest;
+import com.rentnlease.userservice.entity.RegistrationRequest;
+import com.rentnlease.userservice.entity.ValidateOTPRequest;
 import com.rentnlease.userservice.model.User;
 import com.rentnlease.userservice.model.UserOTP;
 
@@ -41,18 +48,19 @@ public class RegisterLoginController {
 		 * Input : (String) email
 		 * Output : (String) success message
 		 */
+		@CrossOrigin
 		@PostMapping(path="/")
-		public @ResponseBody String sendOTP(@RequestParam String email) {
+		public ResponseEntity<?> sendOTP(@RequestBody GenerateOTPRequest generateOTPRequest) {
 			Integer otp = RegisterLoginController.generateOTP();
 			
 			UserOTP uOtp = new UserOTP();
-			uOtp.setEmail(email);
+			uOtp.setEmail(generateOTPRequest.getEmail());
 			uOtp.setOtp(otp);
 			userOTPRepo.save(uOtp);
 			
-			setUpMailConfiguration("rentnleaseservice@gmail.com", "rentnlease#2019", otp, email);
+			setUpMailConfiguration("rentnleaseservice@gmail.com", "rentnlease#2019", otp, generateOTPRequest.getEmail());
 			
-			return "generated";
+			return ResponseEntity.ok(new ApiResponse(true, "OTP sent Successfully"));
 		}
 		
 		/**This methos validates an OTP and email address.
@@ -61,15 +69,16 @@ public class RegisterLoginController {
 		 * Input : (String) email, (int) OTP
 		 * Output : (booelan) flag
 		 */
+		@CrossOrigin
 		@PostMapping(path="/validateOTP")
-		public @ResponseBody boolean validateOTP(@RequestParam String email, @RequestParam Integer otp) {
-			UserOTP u = userOTPRepo.findUserByEmail(email);
+		public ResponseEntity<?> validateOTP(@RequestBody ValidateOTPRequest validateOTPRequest) {
+			UserOTP u = userOTPRepo.findUserByEmail(validateOTPRequest.getEmail());
 			if(u!=null) {
-				if(u.getOtp().equals(otp)) {
-					return true;
+				if(u.getOtp().equals(validateOTPRequest.getOtp())) {
+					return ResponseEntity.ok(new ApiResponse(true, "Correct OTP."));
 				}
 			}
-			return false;
+			return ResponseEntity.ok(new ApiResponse(false, "Incorrect OTP."));
 		}
 		
 		/**
@@ -78,17 +87,22 @@ public class RegisterLoginController {
 		 * Input: User Details.
 		 * Output: User (bean) Object.
 		 * */
+		@CrossOrigin
 		@PostMapping(path="/register")
-		public @ResponseBody User register(@RequestParam String firstname, @RequestParam String lastname, 
-										   @RequestParam String email, @RequestParam String password, @RequestParam String phone) {
+		public ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest) {
 			User user = new User();
-			user.setFirstname(firstname);
-			user.setLastname(lastname);
-			user.setEmail(email);
-			user.setPassword(password);
-			user.setPhone(phone);
+			user.setFirstname(registrationRequest.getFirstname());
+			user.setLastname(registrationRequest.getLastname());
+			user.setEmail(registrationRequest.getEmail());
+			user.setPassword(registrationRequest.getPassword());
+			user.setPhone(registrationRequest.getPhone());
 			
-			return userRepo.save(user);
+			User u = userRepo.save(user);
+			if(u!=null) {
+				return ResponseEntity.ok(new ApiUserResponse(true, u));
+			} else {
+				return ResponseEntity.ok(new ApiUserResponse(false, null));
+			}
 		}
 		
 		/**
@@ -97,14 +111,15 @@ public class RegisterLoginController {
 		 * Input: email & password.
 		 * Output: User (bean) object.
 		 * */
+		@CrossOrigin
 		@PostMapping(path="/login")
-		public @ResponseBody User login(@RequestParam String email, @RequestParam String password) {
+		public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 			
-			User u = userRepo.findUserByEmailAndPassword(email,password);
+			User u = userRepo.findUserByEmailAndPassword(loginRequest.getEmail(),loginRequest.getPassword());
 			if(u!=null) {
-				return u;
+				return ResponseEntity.ok(new ApiUserResponse(true, u));
 			}
-			return null;
+			return ResponseEntity.ok(new ApiUserResponse(false, null));
 		}
 		
 		//This method is used to generate an OTp between range 1000 and 9999.
@@ -134,7 +149,6 @@ public class RegisterLoginController {
 	    }
 	    
 	    private Properties setUpProperties(){
-	        System.out.println("SSLEmail Start");
 	        Properties props = new Properties();
 	        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
 	        props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
