@@ -6,6 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import { getApi, postApi } from "../Common/api";
 import { registerUser } from "../Actions/UserActions";
 import { connect } from "react-redux";
+import validator from "validator";
 
 export class Register extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ export class Register extends Component {
         lastName: null,
         email: null,
         contactNumber: null,
-        otp: null
+        otp: null,
+        password: null
       }
     };
   }
@@ -52,6 +54,9 @@ export class Register extends Component {
     if (key == "email") {
       if (value == "") {
         error.email = "Email address is required";
+      }
+      if (!validator.isEmail(value)) {
+        error.email = "Email address is invalid";
       }
     }
 
@@ -115,20 +120,54 @@ export class Register extends Component {
 
   submit = event => {
     event.preventDefault();
-    let url = `http://localhost:8086`;
-    let postData = {
-      email: this.state.email
+
+    let error = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      contactNumber: null,
+      password: null
     };
-    postApi(
-      url,
-      data => {
-        this.setState({ showModal: true });
-      },
-      err => {
-        console.log(`error while generating otp`);
-      },
-      postData
-    );
+
+    if (this.state.firstName == "") {
+      error.firstName = "First name is required";
+    }
+
+    if (this.state.lastName == "") {
+      error.lastName = "Last name is required";
+    }
+
+    if (this.state.email == "") {
+      error.email = "Email address is required";
+    }
+
+    if (this.state.password == "") {
+      error.password = "Password is required";
+    }
+
+    if ((this.state.email != "") & !validator.isEmail(this.state.email)) {
+      error.email = "Email address is invalid";
+    }
+
+    if (error.firstName || error.lastName || error.email || error.password) {
+      this.setState({ validationerror: error });
+    } else {
+      let url = `http://localhost:8086`;
+      let postData = {
+        email: this.state.email
+      };
+      postApi(
+        url,
+        data => {
+          this.setState({ showModal: true });
+        },
+        err => {
+          console.log(`error while generating otp`);
+        },
+        postData
+      );
+    }
+
     console.log(values);
   };
 
@@ -183,6 +222,10 @@ export class Register extends Component {
               onChange={this.handleChange}
             />
           </div>
+          {this.state.validationerror.password && (
+            <div>{this.state.validationerror.password}</div>
+          )}
+
           <div>
             <label htmlFor="contactNumber">Contact Number</label>
             <input

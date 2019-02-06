@@ -13,7 +13,7 @@ export class ViewListings extends PureComponent {
     let subject = "RentNLease";
     let body = `\nDear ${this.props.firstname} ${
       this.props.lastname
-    },\n You have booked an room with following details.\n
+    },\n You have booked a room with following details.\n
     Room Location : ${room.location} \n
     Number of Guests: ${room.guests}\n
     Price: ${room.price}\n

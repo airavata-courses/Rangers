@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { login, Login_failure } from "../Actions/UserActions";
 import { Field, reduxForm } from "redux-form";
 import { Button } from "react-bootstrap";
+import validator from "validator";
 
 export class Login extends PureComponent {
   constructor(props) {
@@ -36,6 +37,9 @@ export class Login extends PureComponent {
     if (this.state.password == "") {
       error.password = "Password is required";
     }
+    if ((this.state.user != "") & !validator.isEmail(this.state.username)) {
+      error.username = "Invalid username";
+    }
 
     this.setState({ validationerror: error });
 
@@ -57,6 +61,9 @@ export class Login extends PureComponent {
     if (event.target.name == "username") {
       if (event.target.value == "") {
         error.username = "Username is required";
+      }
+      if ((event.target.value != "") & !validator.isEmail(event.target.value)) {
+        error.username = "Invalid username";
       }
     }
 
