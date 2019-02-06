@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { Redirect } from "react-router";
 import { Modal, Button } from "react-bootstrap";
 import { postApi } from "../Common/api";
+import { connect } from "react-redux";
 
 export class AddListings extends PureComponent {
   constructor(props) {
@@ -62,31 +63,36 @@ export class AddListings extends PureComponent {
   handleChange = event => {
     let error = this.validate(event.target.name, event.target.value);
 
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
     this.setState({
       validationerror: error,
-      [event.target.name]: event.target.value
+      [name]: value
     });
   };
 
   submit = event => {
     let postdata = {
       location: this.state.location,
+      owneremail: this.props.emailAddress,
       guests: this.state.guests,
       available: this.state.available,
       price: this.state.price,
       description: this.state.description,
-      wifi: this.state.wifi,
-      microwave: this.state.microwave,
-      safeCloset: this.state.safeCloset
+      wifi: this.state.wifi == true ? 1 : 0,
+      microwave: this.state.microwave == true ? 1 : 0,
+      safeCloset: this.state.safeCloset == true ? 1 : 0
     };
 
     postApi(
-      "url",
+      "http://localhost:3010/rooms/",
       data => {
-        this.setState({
-          showConfirmationModal: true,
-          addListingConfirmation: data
-        });
+        // this.setState({
+        //   showConfirmationModal: true,
+        //   addListingConfirmation: data
+        // });
       },
       error => {
         this.setState({
@@ -160,9 +166,9 @@ export class AddListings extends PureComponent {
             <label htmlFor="wifi">Wifi</label>
             <input
               name="wifi"
-              type="radio"
-              value={this.state.wifi}
+              type="checkbox"
               checked={this.state.wifi}
+              // checked={this.state.wifi}
               onChange={this.handleChange}
             />
           </div>
@@ -171,9 +177,9 @@ export class AddListings extends PureComponent {
             <label htmlFor="microwave">Microwave</label>
             <input
               name="microwave"
-              type="radio"
-              value={this.state.microwave}
+              type="checkbox"
               checked={this.state.microwave}
+              // checked={this.state.microwave}
               onChange={this.handleChange}
             />
           </div>
@@ -182,9 +188,9 @@ export class AddListings extends PureComponent {
             <label htmlFor="safeCloset">safeCloset</label>
             <input
               name="safeCloset"
-              type="radio"
-              value={this.state.safeCloset}
+              type="checkbox"
               checked={this.state.safeCloset}
+              // checked={this.state.safeCloset}
               onChange={this.handleChange}
             />
           </div>
@@ -211,5 +217,13 @@ export class AddListings extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    emailAddress: state.user.emailAddress
+  };
+};
+
+AddListings = connect(mapStateToProps)(AddListings);
 
 export default AddListings;

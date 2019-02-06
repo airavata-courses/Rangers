@@ -28,15 +28,15 @@ export class DisplayRoom extends PureComponent {
         </div>
         <div>
           <label htmlFor="wifi">WiFi: </label>
-          {this.props.room.wifi}
+          {this.props.room.wifi == 1 ? "True" : "False"}
         </div>
         <div>
           <label htmlFor="microwave">Microwave: </label>
-          {this.props.room.microwave}
+          {this.props.room.microwave == 1 ? "True" : "False"}
         </div>
         <div>
           <label htmlFor="safeCloset">Safe Closet: </label>
-          {this.props.room.safeCloset}
+          {this.props.room.safeCloset == 1 ? "True" : "False"}
         </div>
         <Button onClick={this.props.onBook}>Book</Button>
       </div>

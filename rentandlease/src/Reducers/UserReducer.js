@@ -15,10 +15,10 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoggedIn: true,
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        emailAddress: payload.emailAddress,
-        contactNumber: payload.contactNumber,
+        firstName: payload.firstname,
+        lastName: payload.lastname,
+        emailAddress: payload.email,
+        contactNumber: payload.phone,
         loginMessage: null
       };
 

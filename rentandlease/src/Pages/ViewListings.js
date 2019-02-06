@@ -2,19 +2,45 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { getRooms, confirmRoom } from "../Actions/RoomsActions";
 import DisplayRoom from "../Components/DisplayRoom";
+import { postApi } from "../Common/api";
 
 export class ViewListings extends PureComponent {
   componentDidMount() {
     this.props.getRooms();
   }
 
-  sendNotification = useremail => {
-    console.log(`Send email notification for ${useremail}`);
+  sendNotification = room => {
+    let subject = "RentNLease";
+    let body = `\nDear ${this.props.firstname} ${
+      this.props.lastname
+    },\n You have booked an room with following details.\n
+    Room Location : ${room.location} \n
+    Number of Guests: ${room.guests}\n
+    Price: ${room.price}\n
+    Description: ${room.description} \n
+    Thanks & Regards,\nRentNLease Team`;
+    let postdata = {
+      recipient: this.props.useremail,
+      subject: subject,
+      body: body
+    };
+    postApi(
+      "http://localhost:55555/",
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      postdata
+    );
     // post api call for sending notification
   };
 
-  onBookClick = id => {
-    this.props.confirmRoom(id, this.props.useremail, this.sendNotification);
+  onBookClick = room => {
+    this.props.confirmRoom(room.id, this.props.useremail, data =>
+      this.sendNotification(room)
+    );
   };
   render() {
     return (
@@ -23,7 +49,7 @@ export class ViewListings extends PureComponent {
           <DisplayRoom
             room={room}
             useremail={this.props.useremail}
-            onBook={() => this.onBookClick(room.id)}
+            onBook={() => this.onBookClick(room)}
           />
         ))}
       </div>
@@ -34,7 +60,9 @@ export class ViewListings extends PureComponent {
 const mapStateToProps = state => {
   return {
     rooms: state.rooms.rooms,
-    useremail: state.user.emailAddress
+    useremail: state.user.emailAddress,
+    firstname: state.user.firstName,
+    lastname: state.user.lastName
   };
 };
 

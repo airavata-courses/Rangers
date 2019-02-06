@@ -4,6 +4,8 @@ import RegisterForm from "../Components/RegisterForm";
 import ConfirmOTP from "../Components/ConfirmOTP";
 import { Modal, Button } from "react-bootstrap";
 import { getApi, postApi } from "../Common/api";
+import { registerUser } from "../Actions/UserActions";
+import { connect } from "react-redux";
 
 export class Register extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ export class Register extends Component {
       contactNumber: "",
       showModal: false,
       otp: "",
+      password: "",
       validationerror: {
         firstName: null,
         lastName: null,
@@ -56,36 +59,48 @@ export class Register extends Component {
   };
 
   onValidationOtp = data => {
-    if (data == "true") {
-      let postdata = {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        contactNumber: this.state.contactNumber
-      };
-      postApi(
-        "url",
-        data => {
-          this.props.history.push("/home");
-        },
-        err => {},
-        postdata
-      );
-    } else {
-      let error = {
-        firstName: null,
-        lastName: null,
-        email: null,
-        contactNumber: null,
-        otp: "Invalid OTP"
-      };
-      this.setState({ validationerror: error });
-    }
+    let postdata = {
+      firstname: this.state.firstName,
+      lastname: this.state.lastName,
+      email: this.state.email,
+      phone: this.state.contactNumber,
+      password: this.state.password
+    };
+    let url = `http://localhost:8086/register`;
+    postApi(
+      url,
+      data => {
+        this.props.registerUser(data.user);
+        this.props.history.push("/home");
+      },
+      err => {},
+      postdata
+    );
   };
   verifyOTP = () => {
     console.log("veriy otp");
     // getApi("url", "GET", data => this.onValidationOtp(data), error => {});
-    postApi("url", data => this.onValidationOtp(data), error => {});
+    let url = `http://localhost:8086/validateOTP`;
+    let postData = {
+      email: this.state.email,
+      otp: this.state.otp
+    };
+    postApi(
+      url,
+      data => this.onValidationOtp(data),
+      error => {
+        let errorObj = {
+          firstName: null,
+          lastName: null,
+          email: null,
+          contactNumber: null,
+          otp: "Invalid OTP"
+        };
+        this.setState({ validationerror: errorObj });
+        console.log(`error in verify otp`, error);
+      },
+      postData
+    );
   };
 
   handleChange = event => {
@@ -100,7 +115,20 @@ export class Register extends Component {
 
   submit = event => {
     event.preventDefault();
-    this.setState({ showModal: true });
+    let url = `http://localhost:8086`;
+    let postData = {
+      email: this.state.email
+    };
+    postApi(
+      url,
+      data => {
+        this.setState({ showModal: true });
+      },
+      err => {
+        console.log(`error while generating otp`);
+      },
+      postData
+    );
     console.log(values);
   };
 
@@ -145,6 +173,16 @@ export class Register extends Component {
           {this.state.validationerror.email && (
             <div>{this.state.validationerror.email}</div>
           )}
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
           <div>
             <label htmlFor="contactNumber">Contact Number</label>
             <input
@@ -187,5 +225,16 @@ export class Register extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    useremail: state.user.emailAddress
+  };
+};
+
+Register = connect(
+  mapStateToProps,
+  { registerUser }
+)(Register);
 
 export default Register;

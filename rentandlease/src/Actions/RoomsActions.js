@@ -12,9 +12,16 @@ export const getRooms = () => dispatch => {
 
 export const confirmRoom = (id, useremail, sendNotification) => dispatch => {
   console.log(`Confirm booking for id ${id}`);
-  postApi("url", data => {
-    sendNotification(useremail);
-  });
+  // postApi(
+  //   "url",
+  //   data => {
+  //     sendNotification(useremail);
+  //   },
+  //   err => {
+  //     console.log(`error in confirm booking ${err}`);
+  //   }
+  // );
+  sendNotification(useremail);
 };
 
 function setRooms(data) {

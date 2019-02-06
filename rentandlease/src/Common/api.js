@@ -29,10 +29,10 @@ export const getApi = (url, type, onSuccess, onFailure) => {
 
 export const postApi = (url, onSuccess, onFailure, data = {}) => {
   let domain = getDomain();
-  let completeurl = domain + url;
+  // let completeurl = domain + url;
   console.log(data);
   console.log(onSuccess);
-  onSuccess("Done");
+  // onSuccess("Done");
   // onSuccess({
   //   isLoggedIn: true,
   //   firstName: "Ameya",
@@ -40,22 +40,24 @@ export const postApi = (url, onSuccess, onFailure, data = {}) => {
   //   emailAddress: "aangal@iu.edu",
   //   contactNumber: "8122725134"
   // });
-  //   fetch(completeurl, {
-  //     method: "POST",
-  //     mode: "cors", // no-cors, cors, *same-origin
-  //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-  //     credentials: "same-origin", // include, *same-origin, omit
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //       // "Content-Type": "application/x-www-form-urlencoded",
-  //     },
-  //     body: JSON.stringify(data)
-  //   }).then(res => {
-  //       if(res.ok){
-  //           return res.json()
-  //       }
-  //       else{
-  //           throw
-  //       }
-  //   }).then(data => onSuccess(data)).catch(error => onFailure(error));
+  fetch(url, {
+    method: "POST",
+    mode: "cors", // no-cors, cors, *same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json"
+      // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: JSON.stringify(data)
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw "result not ok";
+      }
+    })
+    .then(data => onSuccess(data))
+    .catch(error => onFailure(error));
 };

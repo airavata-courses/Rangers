@@ -1,12 +1,29 @@
 import React, { PureComponent } from "react";
 import { Redirect } from "react-router";
+import { Button } from "react-bootstrap";
 
 export class HomePage extends PureComponent {
-  componentDidMount() {
-    return <Redirect to="/login" />;
-  }
   render() {
-    return <div>This is the page which displays user options.</div>;
+    return (
+      <div>
+        <Button
+          onClick={e => {
+            e.preventDefault();
+            this.props.history.push("/addListings");
+          }}
+        >
+          Add Listings
+        </Button>
+        <Button
+          onClick={e => {
+            e.preventDefault();
+            this.props.history.push("/viewListings");
+          }}
+        >
+          View Listings
+        </Button>
+      </div>
+    );
   }
 }
 
