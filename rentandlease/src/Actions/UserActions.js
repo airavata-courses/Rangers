@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../Constants/Constants";
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
 import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
@@ -24,6 +24,17 @@ export const login = (username, password, onSuccessfulLogin) => dispatch => {
 export const registerUser = user => dispatch => {
   dispatch(set_User(user));
 };
+
+export const logout = () => dispatch => {
+  dispatch(logout_user());
+};
+
+function logout_user() {
+  return {
+    type: LOGOUT,
+    payload: null
+  };
+}
 
 // export const verifyOtp = (otp) => dispatch => {
 //   return new Promise()

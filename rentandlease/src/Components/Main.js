@@ -12,17 +12,17 @@ export class Main extends PureComponent {
   render() {
     return (
       <div>
-        <Provider store={store}>
-          <Router>
-            <div>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/home" component={HomePage} />
-              <Route exact path="/addListings" component={AddListings} />
-              <Route exact path="/viewListings" component={ViewListings} />
-              <Route exact path="/register" component={Register} />
-            </div>
-          </Router>
-        </Provider>
+        {/* <Provider store={store}> */}
+        <Router>
+          <div>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/home" component={HomePage} />
+            <Route exact path="/addListings" component={AddListings} />
+            <Route exact path="/viewListings" component={ViewListings} />
+            <Route exact path="/register" component={Register} />
+          </div>
+        </Router>
+        {/* </Provider> */}
       </div>
     );
   }

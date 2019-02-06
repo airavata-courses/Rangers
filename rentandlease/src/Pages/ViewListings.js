@@ -43,17 +43,22 @@ export class ViewListings extends PureComponent {
     );
   };
   render() {
-    return (
-      <div>
-        {this.props.rooms.map(room => (
-          <DisplayRoom
-            room={room}
-            useremail={this.props.useremail}
-            onBook={() => this.onBookClick(room)}
-          />
-        ))}
-      </div>
-    );
+    if (!this.props.isLoggedIn) {
+      this.props.history.push("/login");
+      return null;
+    } else {
+      return (
+        <div>
+          {this.props.rooms.map(room => (
+            <DisplayRoom
+              room={room}
+              useremail={this.props.useremail}
+              onBook={() => this.onBookClick(room)}
+            />
+          ))}
+        </div>
+      );
+    }
   }
 }
 
@@ -62,7 +67,8 @@ const mapStateToProps = state => {
     rooms: state.rooms.rooms,
     useremail: state.user.emailAddress,
     firstname: state.user.firstName,
-    lastname: state.user.lastName
+    lastname: state.user.lastName,
+    isLoggedIn: state.user.isLoggedIn
   };
 };
 

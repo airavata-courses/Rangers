@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../Constants/Constants";
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
 
 const initialState = {
   isLoggedIn: false,
@@ -28,6 +28,9 @@ export default (state = initialState, { type, payload }) => {
         isLoggedIn: false,
         loginMessage: payload
       };
+
+    case LOGOUT:
+      return { initialState };
 
     default:
       return state;

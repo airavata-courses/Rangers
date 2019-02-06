@@ -13,3 +13,5 @@ export const SET_USER = "SET_USER";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const SET_ROOMS = "SET_ROOMS";
+
+export const LOGOUT = "LOGOUT";
