@@ -25,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rentnlease.userservice.data.UserOTPRepository;
 import com.rentnlease.userservice.data.UserRepository;
-import com.rentnlease.userservice.entity.ApiResponse;
-import com.rentnlease.userservice.entity.ApiUserResponse;
-import com.rentnlease.userservice.entity.GenerateOTPRequest;
-import com.rentnlease.userservice.entity.LoginRequest;
-import com.rentnlease.userservice.entity.RegistrationRequest;
-import com.rentnlease.userservice.entity.ValidateOTPRequest;
-import com.rentnlease.userservice.model.User;
-import com.rentnlease.userservice.model.UserOTP;
+import com.rentnlease.userservice.model.ApiResponse;
+import com.rentnlease.userservice.model.ApiUserResponse;
+import com.rentnlease.userservice.model.GenerateOTPRequest;
+import com.rentnlease.userservice.model.LoginRequest;
+import com.rentnlease.userservice.model.RegistrationRequest;
+import com.rentnlease.userservice.model.ValidateOTPRequest;
+import com.rentnlease.userservice.entity.User;
+import com.rentnlease.userservice.entity.UserOTP;
 
 @RestController
 public class RegisterLoginController {
@@ -119,7 +119,8 @@ public class RegisterLoginController {
 			if(u!=null) {
 				return ResponseEntity.ok(new ApiUserResponse(true, u));
 			}
-			return ResponseEntity.ok(new ApiUserResponse(false, null));
+			//return ResponseEntity.ok(new ApiUserResponse(false, null));
+			return (ResponseEntity<?>) ResponseEntity.badRequest().body("bad request");
 		}
 		
 		//This method is used to generate an OTp between range 1000 and 9999.
