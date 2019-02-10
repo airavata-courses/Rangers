@@ -10,8 +10,15 @@ var rooms = {
   },
   getRoomsByLocation: function(location, callback) {
     return db.query(
-      "Select * from rooms where location = ?;",
+      "Select * from rooms where available = 1 and location = ?;",
       [location],
+      callback
+    );
+  },
+  updateRoom: function(id, callback) {
+    return db.query(
+      "Update rooms set available = FALSE where id = ?",
+      [id],
       callback
     );
   },
