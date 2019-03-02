@@ -10,7 +10,9 @@ pipeline{
 	        stage('Deploy'){
 	            steps{
 	            sh ''' cd $WORKSPACE/userservice
-		    sh run_userservice.sh'''             
+		    docker-compose up --detach --build
+		    docker image prune -a -f
+		    '''             
 	            }
 	        }
 	  }
