@@ -2,6 +2,17 @@ pipeline{
     agent { label 'roomservice' }
    
 	  stages {
+            stage('Job started Notification'){
+				  steps{
+					  script{
+						def colorCode = '#FFFF00'
+						def subject = "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  						def summary = "${subject} (${env.BUILD_URL})"
+						slackSend (color: colorCode, message: summary)
+					  }
+					
+				  }
+			  }
 	        stage('clone repo'){
 	            steps{
 	                git branch: 'RoomService', url: 'https://github.com/airavata-courses/Rangers.git'
@@ -15,5 +26,16 @@ pipeline{
 		            '''             
 	            }
 	        }
+            stage('Job success Notification'){
+				  steps{
+					  script{
+						def colorCode = '#00FF00'
+						def subject = "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  						def summary = "${subject} (${env.BUILD_URL})"
+						slackSend (color: colorCode, message: summary)
+					  }
+					
+				  }
+			  }
 	  }
 }
