@@ -6,6 +6,15 @@ pipeline{
 	      nodejs 'node'
 	  }
 	  stages {
+
+		  	stage('Send slack Notification'){
+				  steps{
+					def colorCode = '#FFFF00'
+					def subject = "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  					def summary = "${subject} (${env.BUILD_URL})"
+					slackSend (color: colorCode, message: summary)
+				  }
+			  }
 	        stage('clone repo'){
 	            steps{
 	                git branch: 'UI', url: 'https://github.com/airavata-courses/Rangers.git'
@@ -40,5 +49,13 @@ pipeline{
 	                
 	            }
 	        }
+			stage('Send slack Notification'){
+				  steps{
+					def colorCode = '#00FF00'
+					def subject = "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  					def summary = "${subject} (${env.BUILD_URL})"
+					slackSend (color: colorCode, message: summary)
+				  }
+			  }
 	  }
 }
