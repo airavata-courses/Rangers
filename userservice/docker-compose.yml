@@ -1,25 +1,28 @@
-version: '2'
+version: "3"
 
 services:
-    db:
-      build: './sql_db'
-      restart: always
-      ports:
-        - "3306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: password
-      networks: 
-        - host
-    ms:
-      build: '.'
-      ports:
-        - "8086:8086"
-      links:
-        - db
-      depends_on:
-        - db
-      networks: 
-        - host
+  db:
+    build: "./sql_db"
+    image: userservice_db
+    restart: "no"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - host
+  ms:
+    build: "."
+    image: userservice_ms
+    restart: always
+    ports:
+      - "8086:8086"
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - host
 networks:
-   host:
-      driver: "bridge"
+  host:
+    driver: "bridge"
