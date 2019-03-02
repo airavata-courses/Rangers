@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent { label 'react' }
     
 	
 	  tools {
@@ -25,10 +25,10 @@ pipeline{
 	                
 	            }
 	        }
-	        stage('Build'){
+	        stage('Deploy'){
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
-	                npm run build '''
+	                sh run_react.sh '''
 	                
 	            }
 	        }
