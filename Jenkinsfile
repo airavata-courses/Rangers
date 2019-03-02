@@ -7,12 +7,15 @@ pipeline{
 	  }
 	  stages {
 
-		  	stage('Send slack Notification'){
+		  	stage('Job started Notification'){
 				  steps{
-					def colorCode = '#FFFF00'
-					def subject = "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  					def summary = "${subject} (${env.BUILD_URL})"
-					slackSend (color: colorCode, message: summary)
+					  script{
+						def colorCode = '#FFFF00'
+						def subject = "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  						def summary = "${subject} (${env.BUILD_URL})"
+						slackSend (color: colorCode, message: summary)
+					  }
+					
 				  }
 			  }
 	        stage('clone repo'){
@@ -49,12 +52,15 @@ pipeline{
 	                
 	            }
 	        }
-			stage('Send slack Notification'){
+			stage('Job success Notification'){
 				  steps{
-					def colorCode = '#00FF00'
-					def subject = "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  					def summary = "${subject} (${env.BUILD_URL})"
-					slackSend (color: colorCode, message: summary)
+					  script{
+						def colorCode = '#00FF00'
+						def subject = "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  						def summary = "${subject} (${env.BUILD_URL})"
+						slackSend (color: colorCode, message: summary)
+					  }
+					
 				  }
 			  }
 	  }
