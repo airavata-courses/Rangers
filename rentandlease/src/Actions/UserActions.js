@@ -2,7 +2,8 @@ import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
 import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
-  let url = `http://localhost:8086/login`;
+  //let url = `http://localhost:8086/login`;
+  let url = 'http://usermicroservice:8086/login';
   let postdata = {
     email: username,
     password: password
