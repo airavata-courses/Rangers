@@ -115,7 +115,7 @@ export class AddListings extends PureComponent {
 
       postApi(
         //"http://localhost:3010/rooms/",
-        "http://roommicroservice:3010/rooms/",
+        "http://roommicroservice.service.consul:3010/rooms/",
         data => {
           // this.setState({
           //   showConfirmationModal: true,
