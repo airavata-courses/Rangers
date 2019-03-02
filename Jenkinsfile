@@ -28,15 +28,15 @@ pipeline{
 	        stage('Deploy'){
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
-	                sudo docker kill react_ui || true
+	                docker kill react_ui || true
 
-					sudo docker rm react_ui || true
+					docker rm react_ui || true
 
-					sudo docker rmi react_ui || true
+					docker rmi react_ui || true
 
-					sudo docker build -t react_ui .
+					docker build -t react_ui .
 
-					sudo docker run -p 3000:3000 --name react_ui react_ui &  '''
+					docker run -p 3000:3000 --name react_ui react_ui &  '''
 	                
 	            }
 	        }
