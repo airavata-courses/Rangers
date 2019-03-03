@@ -128,7 +128,7 @@ public class RegisterLoginController {
 		}
 		
 		@CrossOrigin
-		@GetMapping(path="/")
+		@GetMapping(path="/gateway")
 		public ResponseEntity<?> resolveService(@RequestBody ApiGatewayRequest gatewayRequest) {
 			String key = gatewayRequest.getKey();
 			String username, password;
