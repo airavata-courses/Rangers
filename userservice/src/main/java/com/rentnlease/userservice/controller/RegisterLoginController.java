@@ -128,7 +128,7 @@ public class RegisterLoginController {
 		}
 		
 		//@CrossOrigin
-		@CrossOrigin(origins = "", allowedHeaders = "")
+		@CrossOrigin(origins = "http://149.165.157.35:3000", allowedHeaders = "")
 		@GetMapping(path="/gateway")
 		public ResponseEntity<?> resolveService(@RequestBody ApiGatewayRequest gatewayRequest) {
 			String key = gatewayRequest.getKey();
