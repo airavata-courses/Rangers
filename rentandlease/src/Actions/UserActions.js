@@ -3,7 +3,7 @@ import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
   //let url = `http://localhost:8086/login`;
-  let url = 'http://usermicroservice.service.consul:8086/login';
+  let url = 'http://149.165.156.196:8086/login';
   let postdata = {
     email: username,
     password: password
