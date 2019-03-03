@@ -127,7 +127,7 @@ public class RegisterLoginController {
 			return (ResponseEntity<?>) ResponseEntity.badRequest().body("bad request");
 		}
 		
-		//@CrossOrigin
+		/*//@CrossOrigin
 		@CrossOrigin(origins = "http://149.165.157.35:3000", allowedHeaders = "")
 		@GetMapping(path="/gateway")
 		public ResponseEntity<?> resolveService(@RequestBody ApiGatewayRequest gatewayRequest) {
@@ -141,14 +141,14 @@ public class RegisterLoginController {
 				password = gatewayRequest.getPassword();
 				
 				gateway = new ApiGateway();
-				gateway.setHostname("usermicroservice.service.consul");
+				gateway.setHostname("149.165.156.196");
 				gateway.setPort(8086);
 				gateway.setPath("/sendOTP");
 				gateway.setMethod("POST");
 			}
 			
 			return ResponseEntity.ok(new ApiGatewayResponse(true, gateway));
-		}
+		}*/
 		
 		//This method is used to generate an OTp between range 1000 and 9999.
 		public static Integer generateOTP() {
