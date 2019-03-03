@@ -152,7 +152,7 @@ export class Register extends Component {
     if (error.firstName || error.lastName || error.email || error.password) {
       this.setState({ validationerror: error });
     } else {
-      let url = `http://usermicroservice.service.consul:8086`;
+      let url = `http://149.165.156.196:8086`;
       let postData = {
         email: this.state.email
       };
