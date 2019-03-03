@@ -127,7 +127,8 @@ public class RegisterLoginController {
 			return (ResponseEntity<?>) ResponseEntity.badRequest().body("bad request");
 		}
 		
-		@CrossOrigin
+		//@CrossOrigin
+		@CrossOrigin(origins = "", allowedHeaders = "")
 		@GetMapping(path="/gateway")
 		public ResponseEntity<?> resolveService(@RequestBody ApiGatewayRequest gatewayRequest) {
 			String key = gatewayRequest.getKey();
