@@ -154,7 +154,8 @@ export class Register extends Component {
     } else {
       let url = `http://usermicroservice.service.consul/sendOTP`;
       let postData = {
-        email: this.state.email
+        email: this.state.email,
+        key: "sendOTP"
       };
       postApi(
         url,
