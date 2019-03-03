@@ -25,7 +25,7 @@ export class ViewListings extends PureComponent {
       body: body
     };
     postApi(
-      "http://localhost:55555/notify",
+      "http://149.165.156.112:5001/notify",
       data => {
         console.log(data);
       },
