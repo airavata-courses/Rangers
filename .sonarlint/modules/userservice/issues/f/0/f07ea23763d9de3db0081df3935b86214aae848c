@@ -1,0 +1,18 @@
+
+Ysquid:S1148°"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿHşRMINORZVULNERABILITY
+Vsquid:S1452t"&Remove usage of generic wildcard type.(ææó˜HÿRCRITICALZ
+CODE_SMELL
+[squid:S1452\"&Remove usage of generic wildcard type.(ï„ĞªıÿÿÿÿH€RCRITICALZ
+CODE_SMELL
+\squid:S1066M"/Merge this if statement with the enclosing one.(–Î¹‰HRMAJORZ
+CODE_SMELL
+Usquid:S14525"&Remove usage of generic wildcard type.(Øå“(H‚RCRITICALZ
+CODE_SMELL
+^squid:S1905{"1Remove this unnecessary cast to "ResponseEntity".(îúÏ†HƒRMINORZ
+CODE_SMELL
+hsquid:S1161‹":Add the "@Override" annotation above this method signature(‡èú×H„RMAJORZ
+CODE_SMELL
+}squid:CommentedOutCodeLinez"<This block of commented-out lines of code should be removed.(ˆ³äÃşÿÿÿÿH…RMAJORZ
+CODE_SMELL
+Vsquid:S1452J"&Remove usage of generic wildcard type.(«ûßH†RCRITICALZ
+CODE_SMELL

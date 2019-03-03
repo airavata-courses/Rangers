@@ -1,0 +1,8 @@
+
+_squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¬ÿøÓ“-HÇRMINORZVULNERABILITY
+€squid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(Éí¡Òşÿÿÿÿ8¬ÿøÓ“-HÆRMAJORZ
+CODE_SMELL
+zsquid:S1075)"ARefactor your code to get this URI from a customizable parameter.(›—£ÿÿÿÿÿ8¬ÿøÓ“-HÅRMINORZ
+CODE_SMELL
+„squid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(ÊÊÃ¡øÿÿÿÿ8¾ÎĞÖ“-HúRMAJORZ
+CODE_SMELL

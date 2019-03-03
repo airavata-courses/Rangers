@@ -19,12 +19,16 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentnlease.userservice.data.UserOTPRepository;
 import com.rentnlease.userservice.data.UserRepository;
+import com.rentnlease.userservice.model.ApiGateway;
+import com.rentnlease.userservice.model.ApiGatewayRequest;
+import com.rentnlease.userservice.model.ApiGatewayResponse;
 import com.rentnlease.userservice.model.ApiResponse;
 import com.rentnlease.userservice.model.ApiUserResponse;
 import com.rentnlease.userservice.model.GenerateOTPRequest;
@@ -49,7 +53,7 @@ public class RegisterLoginController {
 		 * Output : (String) success message
 		 */
 		@CrossOrigin
-		@PostMapping(path="/")
+		@PostMapping(path="/sendOTP")
 		public ResponseEntity<?> sendOTP(@RequestBody GenerateOTPRequest generateOTPRequest) {
 			Integer otp = RegisterLoginController.generateOTP();
 			
@@ -121,6 +125,28 @@ public class RegisterLoginController {
 			}
 			//return ResponseEntity.ok(new ApiUserResponse(false, null));
 			return (ResponseEntity<?>) ResponseEntity.badRequest().body("bad request");
+		}
+		
+		@CrossOrigin
+		@GetMapping(path="/")
+		public ResponseEntity<?> resolveService(@RequestBody ApiGatewayRequest gatewayRequest) {
+			String key = gatewayRequest.getKey();
+			String username, password;
+			ApiGateway gateway = new ApiGateway();
+			System.out.println("Key : "+key);
+			
+			if(key.equals("sendOTP")) {
+				username = gatewayRequest.getUsername();
+				password = gatewayRequest.getPassword();
+				
+				gateway = new ApiGateway();
+				gateway.setHostname("usermicroservice.service.consul");
+				gateway.setPort(8086);
+				gateway.setPath("/sendOTP");
+				gateway.setMethod("POST");
+			}
+			
+			return ResponseEntity.ok(new ApiGatewayResponse(true, gateway));
 		}
 		
 		//This method is used to generate an OTp between range 1000 and 9999.
