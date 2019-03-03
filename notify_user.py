@@ -51,7 +51,11 @@ def sendEmail():
     except Exception as e:
         app.logger.error(e)
 
+@app.route('/test', methods=['GET'])
+def test():
+    return "Hello, World!"
+
 if __name__ == '__main__':
     http_server = HTTPServer(WSGIContainer(app))
-    http_server.listen(55555)
+    http_server.listen(5001)
     IOLoop.instance().start()
