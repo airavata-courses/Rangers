@@ -52,6 +52,7 @@ def sendEmail():
     except Exception as e:
         app.logger.error(e)
         
+        
 
 @app.route('/test', methods=['GET'])
 def test():
