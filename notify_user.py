@@ -51,6 +51,7 @@ def sendEmail():
         return "Mail sent Successfully"
     except Exception as e:
         app.logger.error(e)
+        
 
 @app.route('/test', methods=['GET'])
 def test():
