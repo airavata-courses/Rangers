@@ -115,7 +115,7 @@ export class AddListings extends PureComponent {
 
       postApi(
         //"http://localhost:3010/rooms/",
-        "http://149.165.156.244:3010/rooms/",
+        "http://149.165.157.127:3010/rooms/",
         data => {
           // this.setState({
           //   showConfirmationModal: true,
