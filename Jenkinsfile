@@ -1,6 +1,5 @@
 pipeline{
     agent { label 'notificationservice' }
-    
 	environment {
 		DOCKER_USERNAME = credentials('docker_username')
 		DOCKER_PASSWORD = credentials('docker_password')
