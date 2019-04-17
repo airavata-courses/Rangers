@@ -29,6 +29,7 @@ export default (state = initialState, { type, payload }) => {
         loginMessage: payload
       };
 
+      
     case LOGOUT:
       return { initialState };
 
