@@ -27,7 +27,7 @@ pipeline{
 		    docker-compose up -d --build
 		    docker image prune -a -f
 		    docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
-            	    id=$(sudo docker images | grep -E 'userservice_ms' | awk -e '{print $3}')
+            	    id=$(docker images | grep -E 'userservice_ms' | awk -e '{print $3}')
             	    docker tag $id chaitrali1805/user-service:latest
                     docker push chaitrali1805/user-service:latest
 		    '''             
