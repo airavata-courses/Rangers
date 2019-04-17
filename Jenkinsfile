@@ -32,10 +32,10 @@ pipeline{
 					docker rmi notification || true
 
 					docker build -t notification .
-					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
-            	    	    		id=$(docker images | grep -E 'notification' | awk -e '{print $3}')
-            	            		docker tag $id chaitrali1805/notification-service:latest
-                            		docker push chaitrali1805/notification-service:latest
+					sudo docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
+            	    	    		id=$(sudo docker images | grep -E 'notification' | awk -e '{print $3}')
+            	            		sudo docker tag $id chaitrali1805/notification-service:latest
+                            		sudo docker push chaitrali1805/notification-service:latest
 
 					docker run -d -p 5001:5001 --name notification notification
 					'''
