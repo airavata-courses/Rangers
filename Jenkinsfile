@@ -1,7 +1,10 @@
 pipeline{
     agent { label 'notificationservice' }
     
-	
+	environment {
+		DOCKER_USERNAME = credentials('docker_username')
+		DOCKER_PASSWORD = credentials('docker_password')
+    	}
 	  stages {
 
 		  	stage('Job started Notification'){
@@ -30,6 +33,10 @@ pipeline{
 					docker rmi notification || true
 
 					docker build -t notification .
+					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
+            	    	    		id=$(docker images | grep -E 'notification' | awk -e '{print $3}')
+            	            		docker tag $id chaitrali1805/notification-service:latest
+                            		docker push chaitrali1805/notification-service:latest
 
 					docker run -d -p 5001:5001 --name notification notification
 					'''
