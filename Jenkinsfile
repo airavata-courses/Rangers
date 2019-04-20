@@ -1,7 +1,6 @@
 pipeline{
     agent { label 'react' }
     
-	
 	  tools {
 	      nodejs 'node'
 	  }
