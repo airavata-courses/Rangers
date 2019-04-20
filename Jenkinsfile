@@ -1,7 +1,5 @@
 pipeline{
     agent { label 'react' }
-    
-	
 	  tools {
 	      nodejs 'node'
 	  }
@@ -34,7 +32,7 @@ pipeline{
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
 	                npm test '''
-	                
+	               
 	            }
 	        }
 	        stage('Deploy'){
@@ -43,13 +41,17 @@ pipeline{
 			docker image prune -a -f
 	                docker kill react_ui || true
 
-					docker rm react_ui || true
+					docker rm -f react_ui || true
 
-					docker rmi react_ui || true
+					docker rmi -f react_ui || true
 
 					docker build -t react_ui .
+					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
+            	    			id=$(docker images | grep -E 'react_ui' | awk -e '{print $3}')
+            	    			docker tag $id chaitrali1805/user-interface:latest
+                    			docker push chaitrali1805/user-interface:latest
 
-					docker run -p 3000:3000 --name react_ui react_ui & '''
+					#docker run -p 3000:3000 --name react_ui react_ui & '''
 	                
 	            }
 	        }
@@ -66,3 +68,4 @@ pipeline{
 			  }
 	  }
 }
+
