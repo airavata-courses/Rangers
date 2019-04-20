@@ -30,6 +30,12 @@ pipeline{
             	    	    id=$(docker images | grep -E 'roomservice_ms' | awk -e '{print $3}')
             	            docker tag $id chaitrali1805/room-service:latest
                             docker push chaitrali1805/room-service:latest
+			    
+			    JENKINS_NODE_COOKIE=dontKillMe ssh -tt ubuntu@149.165.171.144 ' 
+                            sudo su
+			    kubectl delete deployment roomdeployment
+                            sleep 20
+                            kubectl apply -f room-service.yaml 
 		            '''             
 	            }
 	        }
