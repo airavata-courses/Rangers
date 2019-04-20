@@ -72,7 +72,7 @@ export class Register extends Component {
       password: this.state.password
     };
     // let url = `http://149.165.171.144:30012/users`;
-    let url = `http://localhost:3010/users`;
+    let url = `http://149.165.171.144:30012/users`;
     postApi(
       url,
       data => {
@@ -156,7 +156,7 @@ export class Register extends Component {
       this.setState({ validationerror: error });
     } else {
       // let url = `http://149.165.171.144:30012/sendOTP`;
-      let createUserUrl = `http://localhost:3010/users`;
+      let createUserUrl = `http://149.165.171.144:30012/users`;
       let postdata = {
         firstname: this.state.firstName,
         lastname: this.state.lastName,

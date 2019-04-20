@@ -4,7 +4,7 @@ import { SET_ROOMS } from "../Constants/Constants";
 export const getRooms = () => dispatch => {
   getApi(
     //"http://localhost:3010/rooms/",
-    "http://localhost:3010/rooms/",
+    "http://149.165.171.144:30012/rooms/",
     "Get",
     data => dispatch(setRooms(data)),
     err => console.log(err)
