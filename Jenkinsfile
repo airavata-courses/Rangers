@@ -50,6 +50,13 @@ pipeline{
             	    			id=$(docker images | grep -E 'react_ui' | awk -e '{print $3}')
             	    			docker tag $id chaitrali1805/user-interface:latest
                     			docker push chaitrali1805/user-interface:latest
+					
+					JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 '
+			    		sudo su<<EOF
+			    		kubectl delete deployment userinterfacedeployment
+                            		sleep 30
+                            		kubectl apply -f user-interface.yaml
+			    		'
 
 					#docker run -p 3000:3000 --name react_ui react_ui & '''
 	                
