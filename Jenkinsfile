@@ -35,7 +35,7 @@ pipeline{
 			    JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 ' 
                             sudo su
 			    kubectl delete deployment roomdeployment
-                            sleep 20
+                            sleep 30
                             kubectl apply -f room-service.yaml' 
 		            '''             
 	            }
