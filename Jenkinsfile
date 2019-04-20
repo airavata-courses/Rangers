@@ -4,7 +4,6 @@ pipeline{
 	      nodejs 'node'
 	  }
 	  stages {
-
 		  	stage('Job started Notification'){
 				  steps{
 					  script{
