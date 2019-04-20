@@ -37,8 +37,8 @@ pipeline{
 					docker run -d -p 5001:5001 --name notification notification
 					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
             	    	    		id=$(docker images | grep -E 'notification' | awk -e '{print $3}')
-            	            		docker tag $id chaitrali1805/notification-service:latest
-                            		docker push chaitrali1805/notification-service:latest
+            	            		docker tag $id chaitrali1805/notification-service:1.0.0
+                            		docker push chaitrali1805/notification-service:1.0.0
 					'''
 	                
 	            }
