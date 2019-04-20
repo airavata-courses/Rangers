@@ -71,7 +71,7 @@ export class Register extends Component {
       phone: this.state.contactNumber,
       password: this.state.password
     };
-    let url = `http://149.165.171.144:30011/register`;
+    let url = `http://149.165.171.144:30012/register`;
     postApi(
       url,
       data => {
@@ -85,7 +85,7 @@ export class Register extends Component {
   verifyOTP = () => {
     console.log("veriy otp");
     // getApi("url", "GET", data => this.onValidationOtp(data), error => {});
-    let url = `http://149.165.171.144:30011/validateOTP`;
+    let url = `http://149.165.171.144:30012/validateOTP`;
     let postData = {
       email: this.state.email,
       otp: this.state.otp
@@ -152,7 +152,7 @@ export class Register extends Component {
     if (error.firstName || error.lastName || error.email || error.password) {
       this.setState({ validationerror: error });
     } else {
-      let url = `http://149.165.171.144:30011/sendOTP`;
+      let url = `http://149.165.171.144:30012/sendOTP`;
       let postData = {
         email: this.state.email
         //key: "sendOTP"
