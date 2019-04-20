@@ -3,8 +3,16 @@ import { connect } from "react-redux";
 import { getRooms, confirmRoom } from "../Actions/RoomsActions";
 import DisplayRoom from "../Components/DisplayRoom";
 import { postApi } from "../Common/api";
+import { Modal, Button } from "react-bootstrap";
 
 export class ViewListings extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      showConfirmationModal: false
+    };
+  }
+
   componentDidMount() {
     this.props.getRooms();
   }
@@ -37,15 +45,21 @@ export class ViewListings extends PureComponent {
     // post api call for sending notification
   };
 
+  handleClose = () => {
+    this.setState({ showConfirmationModal: false });
+    this.props.history.push("/viewListings");
+  };
+
   onBookClick = room => {
-    this.props.confirmRoom(room.id, this.props.useremail, data =>
-      this.sendNotification(room)
-    );
-    alert("Room Booking successful");
+    this.props.confirmRoom(room.id, this.props.useremail, data => {
+      this.sendNotification(room);
+    });
+    // alert("Room Booking successful");
+    this.setState({ showConfirmationModal: true });
   };
   render() {
     if (!this.props.isLoggedIn) {
-      this.props.history.push("/login");
+      this.props.history.push("/");
       return null;
     } else {
       return (
@@ -57,6 +71,20 @@ export class ViewListings extends PureComponent {
               onBook={() => this.onBookClick(room)}
             />
           ))}
+          <Modal
+            show={this.state.showConfirmationModal}
+            onHide={this.handleClose}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Confirmation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Booking Successfully</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleClose}>
+                Ok
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       );
     }

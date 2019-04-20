@@ -8,9 +8,9 @@ export class AuthenticateBoundary extends Component {
     console.log("Error caught");
     console.log(error);
     if (error.message === "Unauthenticated") {
-      //   this.props.history.replace("/login");
+      //   this.props.history.replace("/");
       console.log("erro boundary needs to redirect");
-      //   <Redirect to="/login" />;
+      //   <Redirect to="/" />;
     } else {
       throw error;
     }

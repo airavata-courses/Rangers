@@ -17,8 +17,7 @@ class App extends Component {
           {/* <AuthenticateBoundary> */}
           <div>
             <Header />
-            <Main/>
-            <Footer />
+            <Main />
           </div>
         </Provider>
         {/* </AuthenticateBoundary> */}

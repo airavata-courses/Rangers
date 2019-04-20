@@ -10,7 +10,7 @@ export class Header extends PureComponent {
     console.log("Logout called");
     this.props.logout();
 
-    window.location.assign("/login");
+    window.location.assign("/");
   };
 
   render() {

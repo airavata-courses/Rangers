@@ -8,7 +8,7 @@ export class HomePage extends PureComponent {
     console.log(this.props.isLoggedIn);
     if (!this.props.isLoggedIn) {
       console.log("Build test 1");
-      this.props.history.push("/login");
+      this.props.history.push("/");
       return null;
     } else {
       return (

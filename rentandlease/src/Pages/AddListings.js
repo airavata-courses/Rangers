@@ -17,7 +17,7 @@ export class AddListings extends PureComponent {
       microwave: false,
       safeCloset: false,
       showConfirmationModal: false,
-      addListingConfirmation: "",
+      addListingConfirmation: null,
       validationerror: {
         location: null,
         guests: null,
@@ -115,12 +115,12 @@ export class AddListings extends PureComponent {
 
       postApi(
         //"http://localhost:3010/rooms/",
-        "http://149.165.171.144:30012/rooms/",
+        "http://localhost:3010/rooms/",
         data => {
-          // this.setState({
-          //   showConfirmationModal: true,
-          //   addListingConfirmation: data
-          // });
+          this.setState({
+            showConfirmationModal: true,
+            addListingConfirmation: data
+          });
         },
         error => {
           this.setState({
@@ -135,12 +135,12 @@ export class AddListings extends PureComponent {
 
   handleClose = () => {
     this.setState({ showConfirmationModal: false });
-    this.props.history.push("/addListings");
+    this.props.history.push("/home");
   };
 
   render() {
     if (!this.props.isLoggedIn) {
-      this.props.history.push("/login");
+      this.props.history.push("/");
       return null;
     } else {
       return (
@@ -239,7 +239,8 @@ export class AddListings extends PureComponent {
             <Modal.Header closeButton>
               <Modal.Title>Confirmation</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{this.state.addListingConfirmation}</Modal.Body>
+            {/* <Modal.Body>{this.state.addListingConfirmation}</Modal.Body> */}
+            <Modal.Body>Listing added Successfully</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
                 Ok

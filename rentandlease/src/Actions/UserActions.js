@@ -3,7 +3,7 @@ import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
   //let url = `http://localhost:8086/login`;
-  let url = 'http://149.165.171.144:30012/users/verify';
+  let url = "http://localhost:3010/users/verify";
   let postdata = {
     email: username,
     password: password
@@ -12,7 +12,7 @@ export const login = (username, password, onSuccessfulLogin) => dispatch => {
     url,
     data => {
       console.log(`data in login success`, data);
-      dispatch(set_User(data.user));
+      dispatch(set_User(data));
       onSuccessfulLogin();
     },
     err => {

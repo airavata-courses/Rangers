@@ -71,7 +71,8 @@ export class Register extends Component {
       phone: this.state.contactNumber,
       password: this.state.password
     };
-    let url = `http://149.165.171.144:30012/users`;
+    // let url = `http://149.165.171.144:30012/users`;
+    let url = `http://localhost:3010/users`;
     postApi(
       url,
       data => {
@@ -154,21 +155,27 @@ export class Register extends Component {
     if (error.firstName || error.lastName || error.email || error.password) {
       this.setState({ validationerror: error });
     } else {
-      let url = `http://149.165.171.144:30012/sendOTP`;
-      let postData = {
-        email: this.state.email
-        //key: "sendOTP"
+      // let url = `http://149.165.171.144:30012/sendOTP`;
+      let createUserUrl = `http://localhost:3010/users`;
+      let postdata = {
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state.email,
+        phone: this.state.contactNumber,
+        password: this.state.password
       };
-      console.log("post data after register", postData);
+      console.log("post data after register", postdata);
       postApi(
-        url,
+        createUserUrl,
         data => {
-          this.setState({ showModal: true });
+          // this.setState({ showModal: true });
+          this.props.registerUser(postdata);
+          this.props.history.push("/home");
         },
         err => {
           console.log(`error while generating otp`);
         },
-        postData
+        postdata
       );
     }
 
