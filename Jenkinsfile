@@ -25,6 +25,7 @@ pipeline{
 	        stage('Deploy'){
 	            steps{
 	                sh '''
+			docker image prune -a -f
 	                docker kill notification || true
 
 					docker rm notification || true
