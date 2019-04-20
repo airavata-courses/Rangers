@@ -56,7 +56,6 @@ pipeline{
                             		sleep 30
                             		kubectl apply -f user-interface.yaml
 			    		'
-
 					#docker run -p 3000:3000 --name react_ui react_ui & '''
 	                
 	            }
