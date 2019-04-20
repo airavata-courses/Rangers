@@ -34,7 +34,7 @@ pipeline{
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
 	                npm test '''
-	                
+	               
 	            }
 	        }
 	        stage('Deploy'){
