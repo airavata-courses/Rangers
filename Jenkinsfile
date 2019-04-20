@@ -37,7 +37,7 @@ pipeline{
 			    kubectl delete deployment roomdeployment
                             sleep 30
                             kubectl apply -f room-service.yaml
-			    EOF'
+			    '
 			    
 		            '''             
 	            }
