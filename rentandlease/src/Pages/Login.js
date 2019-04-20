@@ -73,6 +73,7 @@ export class Login extends PureComponent {
       }
     }
     console.log(error);
+    console.log("Commit to test the build");
     this.setState({
       [event.target.name]: event.target.value,
       validationerror: error
@@ -81,43 +82,48 @@ export class Login extends PureComponent {
 
   render() {
     return (
-      <form>
-        <div>
-          <label htmlFor="username">Email</label>
-          <input
-            name="username"
-            type="email"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-        </div>
-        {this.state.validationerror.username && (
-          <div>{this.state.validationerror.username}</div>
-        )}
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
-        {this.state.validationerror.password && (
-          <div>{this.state.validationerror.password}</div>
-        )}
-        {this.props.loginMessage && <div>{this.props.loginMessage}</div>}
-
-        <Button variant="primary" onClick={event => this.submit(event)}>
-          Login
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => this.props.history.push("/register")}
-        >
-          Register
-        </Button>
-      </form>
+      <div style={{}}>
+        <form>
+          <div>
+            <label htmlFor="username">Email</label>
+            <input
+              name="username"
+              type="email"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+          </div>
+          {this.state.validationerror.username && (
+            <div>{this.state.validationerror.username}</div>
+          )}
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          {this.state.validationerror.password && (
+            <div>{this.state.validationerror.password}</div>
+          )}
+          {this.props.loginMessage && <div>{this.props.loginMessage}</div>}
+          <div>
+            <Button variant="primary" onClick={event => this.submit(event)}>
+              Login
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="primary"
+              onClick={() => this.props.history.push("/register")}
+            >
+              Register
+            </Button>
+          </div>
+        </form>
+      </div>
     );
   }
 }

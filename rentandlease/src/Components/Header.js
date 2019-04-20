@@ -16,7 +16,7 @@ export class Header extends PureComponent {
   render() {
     return (
       <div id="header">
-        This is the Header
+        RentNLease
         {this.props.isLoggedIn && <Button onClick={this.logout}>Logout</Button>}
         <hr />
       </div>

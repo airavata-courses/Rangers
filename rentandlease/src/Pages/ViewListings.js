@@ -41,6 +41,7 @@ export class ViewListings extends PureComponent {
     this.props.confirmRoom(room.id, this.props.useremail, data =>
       this.sendNotification(room)
     );
+    alert("Room Booking successful");
   };
   render() {
     if (!this.props.isLoggedIn) {

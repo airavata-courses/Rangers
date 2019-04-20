@@ -1,0 +1,11 @@
+#!\bin\sh
+
+docker kill react_ui || true
+
+docker rm react_ui || true
+
+docker rmi react_ui
+
+docker build -t react_ui 
+
+docker run —name react_ui -it -p 3000:3000 react_ui &

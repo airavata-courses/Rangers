@@ -72,6 +72,7 @@ export class Register extends Component {
       password: this.state.password
     };
     let url = `http://localhost:8086/register`;
+    console.log("On valid otp", postdata);
     postApi(
       url,
       data => {
@@ -90,6 +91,8 @@ export class Register extends Component {
       email: this.state.email,
       otp: this.state.otp
     };
+
+    console.log("verify otp post data", postData);
     postApi(
       url,
       data => this.onValidationOtp(data),
@@ -156,6 +159,7 @@ export class Register extends Component {
       let postData = {
         email: this.state.email
       };
+      console.log("post data after register", postData);
       postApi(
         url,
         data => {

@@ -55,7 +55,7 @@ export const postApi = (url, onSuccess, onFailure, data = {}) => {
       if (res.ok) {
         return res.json();
       } else {
-        throw "result not ok";
+        throw "not ok";
       }
     })
     .then(data => onSuccess(data))

@@ -6,7 +6,7 @@ export class Footer extends PureComponent {
     return (
       <div id="footer">
         <hr />
-        This is the Footer
+        Footer
       </div>
     );
   }
