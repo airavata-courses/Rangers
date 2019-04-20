@@ -26,6 +26,10 @@ pipeline{
 	            sh '''
 		            docker-compose up -d --build
 		            docker image prune -a -f
+			    docker login --username='chaitrali1805' --password='Rangers@2019' || true
+            	    	    id=$(docker images | grep -E 'roomservice_ms' | awk -e '{print $3}')
+            	            docker tag $id chaitrali1805/room-service:latest
+                            docker push chaitrali1805/room-service:latest
 		            '''             
 	            }
 	        }
