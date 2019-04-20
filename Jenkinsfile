@@ -40,13 +40,13 @@ pipeline{
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
 			#docker image prune -a -f
-	                #docker kill react_ui || true
+	                docker kill react_ui || true
 
-					#docker rm -f react_ui || true
+					docker rm -f react_ui || true
 
-					#docker rmi -f react_ui || true
+					docker rmi -f react_ui || true
 
-					#docker build -t react_ui .
+					docker build -t react_ui .
 					#docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
             	    			id=$(docker images | grep -E 'react_ui' | awk -e '{print $3}')
             	    			docker tag $id chaitrali1805/user-interface:latest
