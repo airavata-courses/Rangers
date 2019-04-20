@@ -39,7 +39,7 @@ pipeline{
 	        stage('Deploy'){
 	            steps{
 	                sh '''cd $WORKSPACE/rentandlease
-			#docker image prune -a -f
+			docker image prune -a -f
 	                docker kill react_ui || true
 
 					docker rm -f react_ui || true
