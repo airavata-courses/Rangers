@@ -38,6 +38,12 @@ pipeline{
             	    			docker tag $id chaitrali1805/notification-service:latest
                     			docker push chaitrali1805/notification-service:latest
 					#docker run -d -p 5001:5001 --name notification notification
+					JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 '
+			    		sudo su<<EOF
+			    		kubectl delete deployment notificationdeployment
+                            		sleep 30
+                            		kubectl apply -f notification-service.yaml
+			    		'
 					'''
 	                
 	            }
