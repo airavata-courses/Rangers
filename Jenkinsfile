@@ -1,6 +1,9 @@
 pipeline{
     agent { label 'roomservice' }
-   
+   	environment {
+		DOCKER_USERNAME = credentials('docker_username')
+		DOCKER_PASSWORD = credentials('docker_password')
+    	}
 	  stages {
             stage('Job started Notification'){
 				  steps{
