@@ -71,7 +71,7 @@ export class Register extends Component {
       phone: this.state.contactNumber,
       password: this.state.password
     };
-    let url = `http://149.165.171.144:30012/register`;
+    let url = `http://149.165.171.144:30012/users`;
     postApi(
       url,
       data => {
