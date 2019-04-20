@@ -45,8 +45,8 @@ pipeline{
 
 					docker rmi -f react_ui || true
 
-					#docker build -t react_ui .
-					#docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
+					docker build -t react_ui .
+					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
             	    			id=$(docker images | grep -E 'react_ui' | awk -e '{print $3}')
             	    			docker tag $id chaitrali1805/user-interface:latest
                     			docker push chaitrali1805/user-interface:latest
