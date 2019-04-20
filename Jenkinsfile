@@ -32,8 +32,7 @@ pipeline{
             	            docker tag $id chaitrali1805/room-service:latest
                             docker push chaitrali1805/room-service:latest
 			    
-			    JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 ' 
-                            sudo su
+			    JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 '
 			    kubectl delete deployment roomdeployment
                             sleep 30
                             kubectl apply -f room-service.yaml' 
