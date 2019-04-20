@@ -2,7 +2,8 @@ import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
 import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
-  let url = `http://localhost:8086/login`;
+  //let url = `http://localhost:8086/login`;
+  let url = 'http://149.165.171.144:30012/users/verify';
   let postdata = {
     email: username,
     password: password
