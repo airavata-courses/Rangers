@@ -50,7 +50,6 @@ pipeline{
   						def summary = "${subject} (${env.BUILD_URL})"
 						slackSend (color: colorCode, message: summary)
 					  }
-					
 				  }
 			  }
 	  }
