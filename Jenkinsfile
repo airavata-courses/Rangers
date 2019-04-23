@@ -17,7 +17,7 @@ pipeline{
 			  }
 	        stage('clone repo'){
 	            steps{
-	                git branch: 'UI', url: 'https://github.com/airavata-courses/Rangers.git'
+	                git branch: 'UI_green', url: 'https://github.com/airavata-courses/Rangers.git'
 	            }
 	        }
 	        stage('Install dependencies'){
@@ -47,14 +47,16 @@ pipeline{
 					docker build -t react_ui .
 					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
             	    			id=$(docker images | grep -E 'react_ui' | awk -e '{print $3}')
-            	    			docker tag $id chaitrali1805/user-interface:latest
-                    			docker push chaitrali1805/user-interface:latest
+            	    			docker tag $id chaitrali1805/user-interface-green:latest
+                    			docker push chaitrali1805/user-interface-green:latest
 					
 					JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 '
 			    		sudo su<<EOF
-			    		kubectl delete deployment userinterfacedeployment
+			    		kubectl delete deployment userinterfacedeployment-green
                             		sleep 30
-                            		kubectl apply -f user-interface.yaml
+                            		kubectl apply -f user-interface-deploy-green.yaml
+					sleep 10
+					kubectl apply -f user-interface-service-green.yaml
 			    		'
 					#docker run -p 3000:3000 --name react_ui react_ui & '''
 	                
