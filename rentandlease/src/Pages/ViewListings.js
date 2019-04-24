@@ -33,7 +33,7 @@ export class ViewListings extends PureComponent {
       body: body
     };
     postApi(
-      "http://149.165.171.144:30013/notify",
+      "/notify/notify",
       data => {
         console.log(data);
       },
