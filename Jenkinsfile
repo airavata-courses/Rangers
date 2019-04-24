@@ -19,7 +19,7 @@ pipeline{
 			}
 	        stage('Clone Repo'){
 	            steps{
-	                git branch: 'NotificationService', url: 'https://github.com/airavata-courses/Rangers.git'
+	                git branch: 'notification_green', url: 'https://github.com/airavata-courses/Rangers.git'
 	            }
 	        }
 	        stage('Deploy'){
@@ -35,14 +35,16 @@ pipeline{
 					docker build -t notification .
 					docker login --username=DOCKER_USERNAME --password=DOCKER_PASSWORD || true
             	    			id=$(docker images | grep -E 'notification' | awk -e '{print $3}')
-            	    			docker tag $id chaitrali1805/notification-service:latest
-                    			docker push chaitrali1805/notification-service:latest
+            	    			docker tag $id chaitrali1805/notification-service-green:latest
+                    			docker push chaitrali1805/notification-service-green:latest
 					#docker run -d -p 5001:5001 --name notification notification
 					JENKINS_NODE_COOKIE=dontKillMe nohup ssh -tt ubuntu@149.165.171.144 '
 			    		sudo su<<EOF
-			    		kubectl delete deployment notificationdeployment
+			    		kubectl delete deployment notificationdeployment-green
                             		sleep 30
-                            		kubectl apply -f notification-service.yaml
+                            		kubectl apply -f notification-deploy-green.yaml
+					sleep 20
+					kubectl apply -f notification-service-green.yaml
 			    		'
 					'''
 	                
