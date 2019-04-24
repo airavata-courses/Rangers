@@ -31,6 +31,12 @@ export class Login extends PureComponent {
     this.props.history.push("/home");
   };
 
+  responseGoogle = response => {
+    console.log("Failed");
+    console.log(response);
+
+  }
+
   submit = event => {
     event.preventDefault();
     console.log(this.state);
