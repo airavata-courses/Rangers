@@ -28,7 +28,7 @@ export class Login extends PureComponent {
   responseGoogleSucc = response => {
     console.log("Logged in");
     // Cookies.set("username", response.profileObj.name);
-    window.location.href = "/home";
+    this.props.history.push("/home");
   };
 
   submit = event => {
