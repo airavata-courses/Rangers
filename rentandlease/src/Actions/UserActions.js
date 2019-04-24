@@ -1,4 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  GOOGLE_LOGIN
+} from "../Constants/Constants";
 import { postApi } from "../Common/api";
 
 export const login = (username, password, onSuccessfulLogin) => dispatch => {
@@ -37,9 +42,16 @@ function logout_user() {
   };
 }
 
-// export const verifyOtp = (otp) => dispatch => {
-//   return new Promise()
-// }
+export const GoogleUser_Login = user => dispatch => {
+  dispatch(set_google_user(user));
+};
+
+function set_google_user(user) {
+  return {
+    type: GOOGLE_LOGIN,
+    payload: user
+  };
+}
 
 
 

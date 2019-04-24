@@ -7,6 +7,7 @@ import { Field, reduxForm } from "redux-form";
 import { Button } from "react-bootstrap";
 import validator from "validator";
 import { GoogleLogin } from "react-google-login";
+import { GoogleUser_Login } from "../Actions/UserActions";
 
 export class Login extends PureComponent {
   constructor(props) {
@@ -27,7 +28,7 @@ export class Login extends PureComponent {
 
   responseGoogleSucc = response => {
     console.log("Logged in");
-    console.log(response);
+    this.props.GoogleUser_Login(response.profileObj);
     // Cookies.set("username", response.profileObj.name);
     this.props.history.push("/home");
   };
@@ -35,8 +36,7 @@ export class Login extends PureComponent {
   responseGoogle = response => {
     console.log("Failed");
     console.log(response);
-
-  }
+  };
 
   submit = event => {
     event.preventDefault();
@@ -137,13 +137,12 @@ export class Login extends PureComponent {
             </Button>
           </div>
           <GoogleLogin
-              clientId="654502185597-4kdf7cmdei8r72c5ja4bsgi5iqi4b2so.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={this.responseGoogleSucc}
-              onFailure={this.responseGoogle}
-              cookiePolicy={"single_host_origin"}
-        
-            />
+            clientId="654502185597-4kdf7cmdei8r72c5ja4bsgi5iqi4b2so.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={this.responseGoogleSucc}
+            onFailure={this.responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </form>
       </div>
     );
@@ -159,5 +158,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, GoogleUser_Login }
 )(Login);

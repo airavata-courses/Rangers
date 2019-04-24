@@ -1,4 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../Constants/Constants";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  GOOGLE_LOGIN
+} from "../Constants/Constants";
 
 const initialState = {
   isLoggedIn: false,
@@ -29,7 +34,16 @@ export default (state = initialState, { type, payload }) => {
         loginMessage: payload
       };
 
-      
+    case GOOGLE_LOGIN:
+      return {
+        ...state,
+        isLoggedIn: true,
+        firstName: payload.givenName,
+        lastname: payload.familyName,
+        emailAddress: payload.email,
+        loginMessage: null
+      };
+
     case LOGOUT:
       return { initialState };
 
