@@ -6,6 +6,7 @@ import { login, Login_failure } from "../Actions/UserActions";
 import { Field, reduxForm } from "redux-form";
 import { Button } from "react-bootstrap";
 import validator from "validator";
+import { GoogleLogin } from "react-google-login";
 
 export class Login extends PureComponent {
   constructor(props) {
@@ -22,6 +23,12 @@ export class Login extends PureComponent {
 
   onSuccessfulLogin = () => {
     this.props.history.push("/home");
+  };
+
+  responseGoogleSucc = response => {
+    console.log("Logged in");
+    // Cookies.set("username", response.profileObj.name);
+    window.location.href = "/home";
   };
 
   submit = event => {
@@ -122,6 +129,14 @@ export class Login extends PureComponent {
               Register
             </Button>
           </div>
+          <GoogleLogin
+              clientId="654502185597-4kdf7cmdei8r72c5ja4bsgi5iqi4b2so.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={this.responseGoogleSucc}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+        
+            />
         </form>
       </div>
     );
