@@ -15,3 +15,5 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const SET_ROOMS = "SET_ROOMS";
 
 export const LOGOUT = "LOGOUT";
+
+export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
