@@ -1,44 +1,30 @@
 import React, { PureComponent } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import house from "../images/house.jpg";
+//import '../images/house.jpg'
 
 export class DisplayRoom extends PureComponent {
   confirmBooking = (id, useremail) => {};
   render() {
     return (
-      <div style={{ border: "solid 2px black" }}>
-        <div>
-          <label htmlFor="location">Location: </label>
-          {this.props.room.location}
-        </div>
-        <div>
-          <label htmlFor="guests">No of guests: </label>
-          {this.props.room.guests}
-        </div>
-        <div>
-          <label htmlFor="available">Available: </label>
-          {this.props.room.available}
-        </div>
-        <div>
-          <label htmlFor="price">Price: </label>
-          {this.props.room.price}
-        </div>
-        <div>
-          <label htmlFor="description">Description: </label>
-          {this.props.room.description}
-        </div>
-        <div>
-          <label htmlFor="wifi">WiFi: </label>
-          {this.props.room.wifi == 1 ? "True" : "False"}
-        </div>
-        <div>
-          <label htmlFor="microwave">Microwave: </label>
-          {this.props.room.microwave == 1 ? "True" : "False"}
-        </div>
-        <div>
-          <label htmlFor="safeCloset">Safe Closet: </label>
-          {this.props.room.safeCloset == 1 ? "True" : "False"}
-        </div>
-        <Button onClick={this.props.onBook}>Book</Button>
+      <div>
+
+        <Card style={{ width: '25rem', height: '35rem', margin: '0.8rem'}}>
+          <Card.Img variant="top" src={house} />
+          <Card.Body>
+            <Card.Title>{this.props.room.location}</Card.Title>
+            {/* <Card.Text> Location : {this.props.room.location}  </Card.Text> */}
+            <Card.Text> No of guests: {this.props.room.guests}</Card.Text>
+            <Card.Text> Available: {this.props.room.available}</Card.Text>
+            <Card.Text> Price: {this.props.room.price}</Card.Text>
+            <Card.Text> Description: {this.props.room.description}</Card.Text>
+            <Card.Text> WiFi: {this.props.room.wifi == 1 ? "True" : "False"} | 
+                        Microwave: {this.props.room.microwave == 1 ? "True" : "False"} | 
+                        Safe Closet: {this.props.room.safeCloset == 1 ? "True" : "False"}</Card.Text>
+            <Button variant="primary" onClick={this.props.onBook}>Book</Button>
+          </Card.Body>
+        </Card>
+
       </div>
     );
   }
