@@ -8,6 +8,11 @@ import AuthenticateBoundary from "./Common/AuthenticateBoundary";
 import store from "./Components/store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./Pages/Login";
+import HomePage from "./Pages/HomePage";
+import AddListings from "./Pages/AddListings";
+import ViewListings from "./Pages/ViewListings";
+import Register from "./Pages/Register";
 
 class App extends Component {
   render() {
@@ -17,7 +22,12 @@ class App extends Component {
           {/* <AuthenticateBoundary> */}
           <div>
             <Header />
-            <Main />
+
+            <Route exact path="/" component={Login} />
+            <Route exact path="/home" component={HomePage} />
+            <Route exact path="/addListings" component={AddListings} />
+            <Route exact path="/viewListings" component={ViewListings} />
+            <Route exact path="/register" component={Register} />
           </div>
         </Provider>
         {/* </AuthenticateBoundary> */}

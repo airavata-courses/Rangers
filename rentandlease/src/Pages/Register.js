@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import values from "redux-form/lib/values";
 import RegisterForm from "../Components/RegisterForm";
 import ConfirmOTP from "../Components/ConfirmOTP";
-import { Modal, Button } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { getApi, postApi } from "../Common/api";
 import { registerUser } from "../Actions/UserActions";
 import { connect } from "react-redux";
 import validator from "validator";
+import "./Register.css";
 
 export class Register extends Component {
   constructor(props) {
@@ -168,9 +169,8 @@ export class Register extends Component {
       postApi(
         createUserUrl,
         data => {
-          // this.setState({ showModal: true });
           this.props.registerUser(postdata);
-          this.props.history.push("/home");
+          this.props.history.push("/viewListings");
         },
         err => {
           console.log(`error while generating otp`);
@@ -184,10 +184,10 @@ export class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Register">
         {/* <RegisterForm onSubmit={this.submit} /> */}
         <form onSubmit={event => this.submit(event)}>
-          <div>
+          {/* <div>
             <label htmlFor="firstName">First Name</label>
             <input
               name="firstName"
@@ -195,11 +195,21 @@ export class Register extends Component {
               value={this.state.firstName}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="firstName" bsSize="large">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              autoFocus
+              name="firstName"
+              type="firstName"
+              value={this.state.firstName}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.firstName && (
             <div>{this.state.validationerror.firstName}</div>
           )}
-          <div>
+          {/* <div>
             <label htmlFor="lastName">Last Name</label>
             <input
               name="lastName"
@@ -207,11 +217,21 @@ export class Register extends Component {
               value={this.state.lastName}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="lastName" bsSize="large">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              autoFocus
+              name="lastName"
+              type="lastName"
+              value={this.state.lastName}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.lastName && (
             <div>{this.state.validationerror.lastName}</div>
           )}
-          <div>
+          {/* <div>
             <label htmlFor="email">Email</label>
             <input
               name="email"
@@ -219,12 +239,22 @@ export class Register extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="email" bsSize="large">
+            <Form.Label>Email </Form.Label>
+            <Form.Control
+              autoFocus
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.email && (
             <div>{this.state.validationerror.email}</div>
           )}
 
-          <div>
+          {/* <div>
             <label htmlFor="password">Password</label>
             <input
               name="password"
@@ -232,12 +262,22 @@ export class Register extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="password" bsSize="large">
+            <Form.Label>Password </Form.Label>
+            <Form.Control
+              autoFocus
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.password && (
             <div>{this.state.validationerror.password}</div>
           )}
 
-          <div>
+          {/* <div>
             <label htmlFor="contactNumber">Contact Number</label>
             <input
               name="contactNumber"
@@ -245,11 +285,24 @@ export class Register extends Component {
               value={this.state.contactNumber}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="contactNumber" bsSize="large">
+            <Form.Label>Contact Number</Form.Label>
+            <Form.Control
+              autoFocus
+              name="contactNumber"
+              type="contactNumber"
+              value={this.state.contactNumber}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.contactNumber && (
             <div>{this.state.validationerror.contactNumber}</div>
           )}
-          <Button variant="primary" onClick={event => this.submit(event)}>
+          {/* <Button variant="primary" onClick={event => this.submit(event)}>
+            Register
+          </Button> */}
+          <Button block bsSize="large" onClick={event => this.submit(event)}>
             Register
           </Button>
         </form>

@@ -4,10 +4,11 @@ import { getApi, postApi } from "../Common/api";
 import { connect } from "react-redux";
 import { login, Login_failure } from "../Actions/UserActions";
 import { Field, reduxForm } from "redux-form";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import validator from "validator";
 import { GoogleLogin } from "react-google-login";
 import { GoogleUser_Login } from "../Actions/UserActions";
+import "./Login.css";
 
 export class Login extends PureComponent {
   constructor(props) {
@@ -23,14 +24,14 @@ export class Login extends PureComponent {
   }
 
   onSuccessfulLogin = () => {
-    this.props.history.push("/home");
+    this.props.history.push("/viewListings");
   };
 
   responseGoogleSucc = response => {
     console.log("Logged in");
     this.props.GoogleUser_Login(response.profileObj);
     // Cookies.set("username", response.profileObj.name);
-    this.props.history.push("/home");
+    this.props.history.push("/viewListings");
   };
 
   responseGoogle = response => {
@@ -96,9 +97,9 @@ export class Login extends PureComponent {
 
   render() {
     return (
-      <div style={{}}>
+      <div className="Login">
         <form>
-          <div>
+          {/* <div>
             <label htmlFor="username">Email</label>
             <input
               name="username"
@@ -106,11 +107,21 @@ export class Login extends PureComponent {
               value={this.state.username}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="username" bsSize="large">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              autoFocus
+              name="username"
+              type="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           {this.state.validationerror.username && (
             <div>{this.state.validationerror.username}</div>
           )}
-          <div>
+          {/* <div>
             <label htmlFor="password">Password</label>
             <input
               name="password"
@@ -118,24 +129,43 @@ export class Login extends PureComponent {
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
+          <Form.Group controlId="password" bsSize="large">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </Form.Group>
           {this.state.validationerror.password && (
             <div>{this.state.validationerror.password}</div>
           )}
           {this.props.loginMessage && <div>{this.props.loginMessage}</div>}
-          <div>
+          {/* <div>
             <Button variant="primary" onClick={event => this.submit(event)}>
               Login
             </Button>
-          </div>
-          <div>
+          </div> */}
+          <Button block bsSize="large" onClick={event => this.submit(event)}>
+            Login
+          </Button>
+          {/* <div>
             <Button
               variant="primary"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
-          </div>
+          </div> */}
+          <Button
+            block
+            bsSize="large"
+            onClick={() => this.props.history.push("/register")}
+          >
+            Register
+          </Button>
           <GoogleLogin
             clientId="654502185597-4kdf7cmdei8r72c5ja4bsgi5iqi4b2so.apps.googleusercontent.com"
             buttonText="Login"

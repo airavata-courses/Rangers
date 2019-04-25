@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import "./Header.css";
-import { Button } from "react-bootstrap";
+import { Button, Navbar, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import { logout } from "../Actions/UserActions";
 import { withRouter } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 
 export class Header extends PureComponent {
   logout = () => {
@@ -15,18 +16,47 @@ export class Header extends PureComponent {
 
   render() {
     return (
-      <div id="header">
-        RentNLease-Green
-        {this.props.isLoggedIn && <Button onClick={this.logout}>Logout</Button>}
-        <hr />
-      </div>
+      // <div id="header">
+      //   RentNLease-Green
+      //   {this.props.isLoggedIn && <Button onClick={this.logout}>Logout</Button>}
+      //   <hr />
+      // </div>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand>RentNLease</Navbar.Brand>
+        {this.props.isLoggedIn ? (
+          <Nav className="mr-auto">
+            <Link to="/viewListings" className="navbar-brand">
+              View Listing
+            </Link>
+            <Link to="/addListings" className="navbar-brand">
+              Add Listing
+            </Link>
+          </Nav>
+        ) : null}
+        {this.props.isLoggedIn ? (
+          <Nav>
+            <Navbar.Text style={{ paddingRight: "10px" }}>
+              {`Logged in as: ${this.props.firstName} ${this.props.lastName} `}
+            </Navbar.Text>
+            <Button
+              className="logout"
+              variant="outline-secondary"
+              onClick={() => this.logout()}
+            >
+              Logout
+            </Button>
+          </Nav>
+        ) : null}
+      </Navbar>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
+    firstName: state.user.firstName,
+    lastName: state.user.lastName
   };
 };
 
