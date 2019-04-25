@@ -157,7 +157,7 @@ export class Register extends Component {
       this.setState({ validationerror: error });
     } else {
       // let url = `http://149.165.171.144:30012/sendOTP`;
-      let createUserUrl = `/rooms/users`;
+      let createUserUrl = `http://149.165.171.144:30012/users`;
       let postdata = {
         firstname: this.state.firstName,
         lastname: this.state.lastName,

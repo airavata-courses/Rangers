@@ -59,12 +59,12 @@ export class ViewListings extends PureComponent {
     this.setState({ showConfirmationModal: true });
   };
   render() {
-     if (!this.props.isLoggedIn) {
-       this.props.history.push("/");
-       return null;
-     } else {
+    if (!this.props.isLoggedIn) {
+      this.props.history.push("/");
+      return null;
+    } else {
       return (
-        <div class="container">
+        <div className="container">
           {this.props.rooms.map(room => (
             <DisplayRoom
               room={room}
