@@ -4,6 +4,7 @@ import { getRooms, confirmRoom } from "../Actions/RoomsActions";
 import DisplayRoom from "../Components/DisplayRoom";
 import { postApi } from "../Common/api";
 import { Modal, Button } from "react-bootstrap";
+import "./ViewListings.css";
 
 export class ViewListings extends PureComponent {
   constructor() {
@@ -33,7 +34,7 @@ export class ViewListings extends PureComponent {
       body: body
     };
     postApi(
-      "http://149.165.171.144:30013/notify",
+      "/notify/notify",
       data => {
         console.log(data);
       },
@@ -58,12 +59,12 @@ export class ViewListings extends PureComponent {
     this.setState({ showConfirmationModal: true });
   };
   render() {
-    if (!this.props.isLoggedIn) {
-      this.props.history.push("/");
-      return null;
-    } else {
+     if (!this.props.isLoggedIn) {
+       this.props.history.push("/");
+       return null;
+     } else {
       return (
-        <div>
+        <div class="container">
           {this.props.rooms.map(room => (
             <DisplayRoom
               room={room}
