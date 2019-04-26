@@ -36,7 +36,7 @@ export class Header extends PureComponent {
         {this.props.isLoggedIn ? (
           <Nav>
             <Navbar.Text style={{ paddingRight: "10px" }}>
-              {`Logged in as: ${this.props.firstName} ${this.props.lastName} `}
+              {`Logged in as: ${this.props.firstName} `}
             </Navbar.Text>
             <Button
               className="logout"
