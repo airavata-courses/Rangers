@@ -22,7 +22,7 @@ export class Header extends PureComponent {
       //   <hr />
       // </div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>RentNLease</Navbar.Brand>
+        <Navbar.Brand style={{color:"green"}}>RentNLease</Navbar.Brand>
         {this.props.isLoggedIn ? (
           <Nav className="mr-auto">
             <Link to="/viewListings" className="navbar-brand">
