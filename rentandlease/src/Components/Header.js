@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { logout } from "../Actions/UserActions";
 import { withRouter } from "react-router";
 import { Link, NavLink } from "react-router-dom";
-
 export class Header extends PureComponent {
   logout = () => {
     console.log("Logout called");
