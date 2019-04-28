@@ -10,7 +10,7 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 
 parser = SafeConfigParser()
-parser.read('config.ini')
+parser.read('config.ini') 
 
 MAIL_SERVER = "localhost.cs.indiana.edu"
 MAIL_PORT = 465
